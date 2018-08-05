@@ -8,16 +8,16 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/contacts_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        app:title="@string/main_title"
-        app:titleMarginStart="16dp" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/contacts_toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="80dp"-->
+        <!--app:title="@string/main_title"-->
+        <!--app:titleMarginStart="16dp" />-->
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="@android:color/darker_gray"/>-->
 
     <LinearLayout
         android:id="@+id/contacts_container"

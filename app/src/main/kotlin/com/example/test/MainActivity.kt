@@ -4,19 +4,23 @@ import android.os.Bundle
 import android.support.v4.app.FragmentActivity
 import pojo.Contacts
 
+
 class MainActivity : FragmentActivity(),
                      ContactListFragment.OnContactListFragmentInteractionListener {
 
-    override fun onContactListFragmentInteraction(item: Contacts.Contact?) {
-        TODO("not implemented")
+    override fun onContactListFragmentInteraction(item: Contacts.Attributes) {
+        val contactFragment = ContactFragment()
+        supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.contacts_container, contactFragment)
+                ?.commit()
     }
 
-    private val contactListFragment = ContactListFragment()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val contactListFragment = ContactListFragment()
         supportFragmentManager.beginTransaction()
                               .add(R.id.contacts_container, contactListFragment)
                               .commit()

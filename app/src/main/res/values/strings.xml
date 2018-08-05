@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Test</string>
+    <string name="txt_name">Name</string>
+    <string name="btn_send">Send</string>
+    <string name="txt_age">Age</string>
+    <string name="no_name">No name</string>
+    <string name="no_age">No age</string>
+    <string name="title">Title</string>
+    <string name="main_title">Contacts</string>
 </resources>

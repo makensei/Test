@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.contact_fragment.*
-
+import retrofit2.Response
 
 
 class ContactFragment: Fragment() {
@@ -39,13 +39,12 @@ class ContactFragment: Fragment() {
 
     companion object {
 
-        private const val contactName = "name"
-        private const val contactAge = "age"
-        fun newInstance(name: String, age: String): ContactFragment {
+        private const val contactResponse = "response"
+        fun newInstance(response: Response): ContactFragment {
             val fragment = ContactFragment()
             val args = Bundle()
-            args.putString(contactName,name)
-            args.putString(contactAge, age)
+            args.putString(response, contactResponse)
+
             fragment.arguments = args
             return fragment
         }
