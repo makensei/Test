@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.gson.GsonBuilder
 import interfaces.ContactListAPI
-import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.schedulers.IoScheduler
 import pojo.Contacts
@@ -23,37 +22,26 @@ class ContactListFragment: Fragment() {
 
     private var listener: OnContactListFragmentInteractionListener? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view =  inflater.inflate(R.layout.contact_list_fragment, container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl("https://just-test-c0d23.firebaseio.com").build()
+                                                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                                                .baseUrl("https://just-test-c0d23.firebaseio.com").build()
         val dataApi = retrofit.create(ContactListAPI::class.java)
         val response = dataApi.getData()
-
-
         response.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(IoScheduler())
                 .subscribe {
                     if (view is RecyclerView) {
-
-
-
-
-                        view.layoutManager = LinearLayoutManager(context)
-                        view.adapter = ContactListAdapter(it, this)
+                        (view as RecyclerView).layoutManager = LinearLayoutManager(context)
+                        val records: List<Contacts.Record> = it.data.toList()
+                        (view as RecyclerView).adapter = ContactListAdapter(records, listener)
                     }
-
-
                 }
+    }
 
-
-
-
-
-
-
-        return view
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.contact_list_fragment, container, false)
     }
 
     override fun onAttach(context: Context?) {
@@ -71,6 +59,6 @@ class ContactListFragment: Fragment() {
     }
 
     interface OnContactListFragmentInteractionListener {
-        fun onContactListFragmentInteraction(item: Contacts.Attributes)
+        fun onContactListFragmentInteraction(item: Contacts.Record)
     }
 }
