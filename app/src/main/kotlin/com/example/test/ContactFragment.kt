@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.contact_fragment.*
-import retrofit2.Response
+import pojo.Contacts
 
 
 class ContactFragment: Fragment() {
 
    var name: String? = null
-   var age: String? = null
+   var phone: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +21,8 @@ class ContactFragment: Fragment() {
             this.arguments?.getString(contactName)
         } else "null"
 
-        age = if (arguments != null) {
-            this.arguments?.getString(contactAge)
+        phone = if (arguments != null) {
+            this.arguments?.getString(contactPhone)
         } else "null"
     }
 
@@ -34,17 +34,21 @@ class ContactFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
             txtNameContact.text = name
-            txtAgeContact.text = age
+            txtPhoneContact.text = phone
     }
 
     companion object {
 
-        private const val contactResponse = "response"
-        fun newInstance(response: Response): ContactFragment {
+        private const val contactName = "name"
+        private const val contactPhone = "phone"
+
+        fun newInstance(record: Contacts.Record): ContactFragment {
             val fragment = ContactFragment()
             val args = Bundle()
-            args.putString(response, contactResponse)
-
+            val name: String = record.attributes.name
+            val phone: String = record.attributes.phone
+            args.putString(contactName, name)
+            args.putString(contactPhone, phone)
             fragment.arguments = args
             return fragment
         }
