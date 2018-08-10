@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.example.test.ContactFragment.Companion.newInstance
 import kotlinx.android.synthetic.main.activity_main.*
-
 import pojo.Contacts
+
+const val PHOTO_URL = "https://api.adorable.io/avatars/285/abott@adorable.png"
 
 class MainActivity : AppCompatActivity(),
                      ContactListFragment.OnContactListFragmentInteractionListener {
 
     override fun onContactListFragmentInteraction(item: Contacts.Record) {
-        val contactFragment = newInstance(item)
+        val contactFragment = newInstance(item, PHOTO_URL)
         main_toolbar.title = "Information"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
