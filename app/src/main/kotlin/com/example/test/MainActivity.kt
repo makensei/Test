@@ -9,18 +9,19 @@ import pojo.Contacts
 const val PHOTO_URL = "https://api.adorable.io/avatars/285/abott@adorable.png"
 
 class MainActivity : AppCompatActivity(),
-                     ContactListFragment.OnContactListFragmentInteractionListener {
+        ContactListFragment.OnContactListFragmentInteractionListener {
 
     override fun onContactListFragmentInteraction(item: Contacts.Record) {
         val contactFragment = newInstance(item, PHOTO_URL)
+
         main_toolbar.title = "Information"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.contacts_container,
-                               contactFragment,
-                               "ContactFragmentTAG")
                 ?.addToBackStack(null)
+                ?.replace(R.id.contacts_container,
+                        contactFragment,
+                        "ContactFragmentTAG")
                 ?.commit()
     }
 
@@ -33,24 +34,15 @@ class MainActivity : AppCompatActivity(),
 
         val contactListFragment = ContactListFragment()
         supportFragmentManager.beginTransaction()
-                              .add(R.id.contacts_container,
-                                        contactListFragment,
-                                        "ContactListFragmentTAG")
-                              .commit()
+                .add(R.id.contacts_container,
+                        contactListFragment,
+                        "ContactListFragmentTAG")
+                .commit()
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        super.onBackPressed()
         main_toolbar.title = "Contacts"
-//        supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-//        supportActionBar!!.setDisplayShowHomeEnabled(false)
-//
-//        val contactListFragment = ContactListFragment()
-//        supportFragmentManager.beginTransaction()
-//                .replace(R.id.contacts_container,
-//                        contactListFragment,
-//                        "ContactListFragmentTAG")
-//                .commit()
         return true
     }
 }
